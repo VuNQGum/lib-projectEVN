@@ -1,0 +1,418 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "lib-project2": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/lib-project2",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "lib-project2:build:production"
+            },
+            "development": {
+              "browserTarget": "lib-project2:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "lib-project2:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "custom-button2": {
+      "projectType": "library",
+      "root": "projects/custom-button2",
+      "sourceRoot": "projects/custom-button2/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/custom-button2/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/custom-button2/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/custom-button2/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/custom-button2/src/test.ts",
+            "tsConfig": "projects/custom-button2/tsconfig.spec.json",
+            "karmaConfig": "projects/custom-button2/karma.conf.js"
+          }
+        }
+      }
+    },
+    "modal-nhansu": {
+      "projectType": "library",
+      "root": "projects/modal-nhansu",
+      "sourceRoot": "projects/modal-nhansu/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/modal-nhansu/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/modal-nhansu/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/modal-nhansu/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/modal-nhansu/src/test.ts",
+            "tsConfig": "projects/modal-nhansu/tsconfig.spec.json",
+            "karmaConfig": "projects/modal-nhansu/karma.conf.js"
+          }
+        }
+      }
+    },
+    "formdonvi": {
+      "projectType": "library",
+      "root": "projects/formdonvi",
+      "sourceRoot": "projects/formdonvi/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/formdonvi/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/formdonvi/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/formdonvi/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/formdonvi/src/test.ts",
+            "tsConfig": "projects/formdonvi/tsconfig.spec.json",
+            "karmaConfig": "projects/formdonvi/karma.conf.js"
+          }
+        }
+      }
+    },
+    "formnhansu": {
+      "projectType": "library",
+      "root": "projects/formnhansu",
+      "sourceRoot": "projects/formnhansu/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/formnhansu/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/formnhansu/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/formnhansu/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/formnhansu/src/test.ts",
+            "tsConfig": "projects/formnhansu/tsconfig.spec.json",
+            "karmaConfig": "projects/formnhansu/karma.conf.js"
+          }
+        }
+      }
+    },
+    "formnhansu-donvi": {
+      "projectType": "library",
+      "root": "projects/formnhansu-donvi",
+      "sourceRoot": "projects/formnhansu-donvi/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/formnhansu-donvi/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/formnhansu-donvi/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/formnhansu-donvi/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/formnhansu-donvi/src/test.ts",
+            "tsConfig": "projects/formnhansu-donvi/tsconfig.spec.json",
+            "karmaConfig": "projects/formnhansu-donvi/karma.conf.js"
+          }
+        }
+      }
+    },
+    "formphongban": {
+      "projectType": "library",
+      "root": "projects/formphongban",
+      "sourceRoot": "projects/formphongban/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/formphongban/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/formphongban/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/formphongban/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/formphongban/src/test.ts",
+            "tsConfig": "projects/formphongban/tsconfig.spec.json",
+            "karmaConfig": "projects/formphongban/karma.conf.js"
+          }
+        }
+      }
+    },
+    "formnnghecnkt": {
+      "projectType": "library",
+      "root": "projects/formnnghecnkt",
+      "sourceRoot": "projects/formnnghecnkt/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/formnnghecnkt/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/formnnghecnkt/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/formnnghecnkt/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/formnnghecnkt/src/test.ts",
+            "tsConfig": "projects/formnnghecnkt/tsconfig.spec.json",
+            "karmaConfig": "projects/formnnghecnkt/karma.conf.js"
+          }
+        }
+      }
+    },
+    "formquyetdinh": {
+      "projectType": "library",
+      "root": "projects/formquyetdinh",
+      "sourceRoot": "projects/formquyetdinh/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/formquyetdinh/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/formquyetdinh/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/formquyetdinh/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/formquyetdinh/src/test.ts",
+            "tsConfig": "projects/formquyetdinh/tsconfig.spec.json",
+            "karmaConfig": "projects/formquyetdinh/karma.conf.js"
+          }
+        }
+      }
+    },
+    "formdonvi-tree": {
+      "projectType": "library",
+      "root": "projects/formdonvi-tree",
+      "sourceRoot": "projects/formdonvi-tree/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/formdonvi-tree/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/formdonvi-tree/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/formdonvi-tree/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/formdonvi-tree/src/test.ts",
+            "tsConfig": "projects/formdonvi-tree/tsconfig.spec.json",
+            "karmaConfig": "projects/formdonvi-tree/karma.conf.js"
+          }
+        }
+      }
+    },
+    "formdanhmucchung": {
+      "projectType": "library",
+      "root": "projects/formdanhmucchung",
+      "sourceRoot": "projects/formdanhmucchung/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/formdanhmucchung/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/formdanhmucchung/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/formdanhmucchung/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/formdanhmucchung/src/test.ts",
+            "tsConfig": "projects/formdanhmucchung/tsconfig.spec.json",
+            "karmaConfig": "projects/formdanhmucchung/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "lib-project2"
+}

@@ -1,0 +1,116 @@
+<div class="form-container">
+
+    <!-- Header -->
+    <div class="form-header">
+        <div class="form-header-title search-head">
+            <span>Nhân sự</span>
+            <mat-form-field class="form-filter" style="margin-left: 16px;">
+                <input #textInput autofocus="true" class="form-filter-input" matInput type="text"
+                    (input)="dtns.filterGlobal(textInput.value, 'contains')" placeholder="Tìm kiếm">
+            </mat-form-field>
+        </div>
+        <div class="flex">
+            <button mat-icon-button style="margin-right: 8px;" [tabIndex]="0" (click)="saveAndClose()">
+                <i class="fal fa-check-circle icon-size-6"></i>
+            </button>
+            <button mat-icon-button [tabIndex]="-1" (click)="onClose()">
+                <i class="fa-light fa-xmark icon-size-6"></i>
+            </button>
+        </div>
+    </div>
+
+    <div #mainns class="form-content h-modal">
+        <!-- Multiple Select -->
+        <p-table *ngIf="selectionMode != null && selectionMode != 'single'; else elseBlock" id="table" [value]="nhansus" selectionMode="single" [dataKey]="idField" responsiveLayout="scroll"
+        scrollHeight="{{mainns.offsetHeight - 46}}px"
+        [globalFilterFields]="['sohieu', 'ten', 'tenkhaisinh','departmentc1Name','chucdanh']" [scrollable]="true"
+        [(selection)]="listSelected" selectionMode="multiple">
+            <ng-template pTemplate="caption">
+                <div #caption class="flex items-center justify-between">
+                    <div style="width: 20%px;" class="mat-field-label">Đơn vị:</div>
+                    <!-- <mat-form-field style="width: 80%;">
+                        <input matInput (click)="onChonDonvi()" readonly [(ngModel)]="selectedDonvi.orgName">
+                    </mat-form-field> -->
+                    <div class="" style="width: 80%; text-align: center;" (click)="onChonDonvi()">
+                        {{selectedDonvi.orgName}}</div>
+                    <button class="mx-1" color="primary" mat-flat-button (click)="onChonDonvi()"
+                        matTooltip="Chọn đơn vị">
+                        <!-- <span>Chọn</span> -->
+                        <i class="fa-light fa-buildings icon-size-5"></i>
+                    </button>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 10%" class="text-center">
+                        <p-tableHeaderCheckbox style="margin: 0 auto"></p-tableHeaderCheckbox>
+                    </th>
+                    <th *ngIf="data.hthiSohieu" pSortableColumn="sohieu" style="width: 12.5%;">Số hiệu</th>
+                    <!-- <th pContextMenuRow="ten" pSortableColumn="ten" style="width: 10%;">Tên</th> -->
+                    <th pContextMenuRow="tenkhaisinh" pSortableColumn="tenkhaisinh"
+                        [style]="data.hthiSohieu? 'width: 25%;' : 'width: 30%'">Họ tên</th>
+                    <th pContextMenuRow="departmentc1Name" pSortableColumn="departmentc1Name"
+                        [style]="data.hthiSohieu? 'width: 32.5%;' : 'width: 37.5%'">Phòng ban</th>
+                    <th pContextMenuRow="chucdanh" pSortableColumn="chucdanh" style="width: 30%;">Chức danh</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-nhansu>
+                <tr [pSelectableRow]="nhansu">
+                    <td style="width: 10%">
+                        <p-tableCheckbox [pSelectableRow]="nhansu" style="margin: 0 auto" [value]="nhansu"></p-tableCheckbox>
+                    </td>
+                    <td *ngIf="data.hthiSohieu" style="width: 12.5%; word-break: break-word;">{{nhansu.sohieu}}</td>
+                    <!-- <td style="width: 10%;">{{nhansu.tenkhaisinh.trim().split(' ').slice(-1).join(' ')}}</td> -->
+                    <td [style]="data.hthiSohieu? 'width: 25%;' : 'width: 30%'">{{nhansu.tenkhaisinh}}</td>
+                    <td [style]="data.hthiSohieu? 'width: 32.5%;' : 'width: 37.5%'">{{nhansu?.phongban ||
+                        nhansu?.departmentc1Name || nhansu?.tenphong}}</td>
+                    <td style="width: 30%;">{{nhansu.vtricdanh}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+        <ng-template #elseBlock>
+            <p-table #dtns id="table" [value]="nhansus" selectionMode="single" [dataKey]="idField" responsiveLayout="scroll"
+                scrollHeight="{{mainns.offsetHeight - 46}}px"
+                [globalFilterFields]="['sohieu', 'ten', 'tenkhaisinh','departmentc1Name','chucdanh']" [scrollable]="true"
+                [(selection)]="selected">
+                <ng-template pTemplate="caption">
+                    <div #caption class="flex items-center justify-between">
+                        <div style="width: 20%px;" class="mat-field-label">Đơn vị:</div>
+                        <!-- <mat-form-field style="width: 80%;">
+                            <input matInput (click)="onChonDonvi()" readonly [(ngModel)]="selectedDonvi.orgName">
+                        </mat-form-field> -->
+                        <div class="" style="width: 80%; text-align: center;" (click)="onChonDonvi()">
+                            {{selectedDonvi.orgName}}</div>
+                        <button class="mx-1" color="primary" mat-flat-button (click)="onChonDonvi()"
+                            matTooltip="Chọn đơn vị">
+                            <!-- <span>Chọn</span> -->
+                            <i class="fa-light fa-buildings icon-size-5"></i>
+                        </button>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th *ngIf="data.hthiSohieu" pSortableColumn="sohieu" style="width: 12.5%;">Số hiệu</th>
+                        <!-- <th pContextMenuRow="ten" pSortableColumn="ten" style="width: 10%;">Tên</th> -->
+                        <th pContextMenuRow="tenkhaisinh" pSortableColumn="tenkhaisinh"
+                            [style]="data.hthiSohieu? 'width: 25%;' : 'width: 30%'">Họ tên</th>
+                        <th pContextMenuRow="departmentc1Name" pSortableColumn="departmentc1Name"
+                            [style]="data.hthiSohieu? 'width: 32.5%;' : 'width: 37.5%'">Phòng ban</th>
+                        <th pContextMenuRow="chucdanh" pSortableColumn="chucdanh" style="width: 30%;">Chức danh</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-nhansu>
+                    <tr [pSelectableRow]="nhansu" (dblclick)="onRowSelect($event, nhansu)">
+                        <td *ngIf="data.hthiSohieu" style="width: 12.5%; word-break: break-word;">{{nhansu.sohieu}}</td>
+                        <!-- <td style="width: 10%;">{{nhansu.tenkhaisinh.trim().split(' ').slice(-1).join(' ')}}</td> -->
+                        <td [style]="data.hthiSohieu? 'width: 25%;' : 'width: 30%'">{{nhansu.tenkhaisinh}}</td>
+                        <td [style]="data.hthiSohieu? 'width: 32.5%;' : 'width: 37.5%'">{{nhansu?.phongban ||
+                            nhansu?.departmentc1Name || nhansu?.tenphong}}</td>
+                        <td style="width: 30%;">{{nhansu.vtricdanh}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-template>
+    </div>
+</div>

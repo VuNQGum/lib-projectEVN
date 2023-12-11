@@ -1,0 +1,72 @@
+<lib-custom-button2 urlApi="http://10.1.117.101:3002"></lib-custom-button2>
+<router-outlet></router-outlet>
+<button mat-raised-button color="primary" (click)="openDonvi()">
+  <p>Chọn đơn vị</p>
+  <i class="fa-light fa-xmark icon-size-5"></i>
+</button>
+<p-divider></p-divider>
+<button mat-raised-button color="primary" (click)="openNhansu()">
+  <p>Chọn nhân sự</p>
+  <i class="fa-light fa-xmark icon-size-5"></i>
+</button>
+
+<button mat-raised-button color="primary" (click)="openNhansuDonvi()">
+  <p>Chọn nhân sự đơn vị</p>
+  <i class="fa-light fa-xmark icon-size-5"></i>
+</button>
+
+<button mat-raised-button color="primary" (click)="openPhongban()">
+  <p>Chọn phòng ban</p>
+  <i class="fa-light fa-xmark icon-size-5"></i>
+</button>
+
+<button mat-raised-button color="primary" (click)="openNNghe()">
+  <p>Chọn Nnghe</p>
+  <i class="fa-light fa-xmark icon-size-5"></i>
+</button>
+
+<button mat-raised-button color="primary" (click)="openQdinh()">
+  <p>Chọn quyet dinh</p>
+  <i class="fa-light fa-xmark icon-size-5"></i>
+</button>
+
+<p-dropdown [style]="{ width: '100%' }" [options]="columns" optionLabel="name" optionValue="id" appendTo="body" [required]="true"
+name="tennganhang" [(ngModel)]="obj" [filter]="true" filterBy="name" placeholder="&nbsp;" [showClear]="true">
+</p-dropdown>
+<button mat-raised-button color="primary" (click)="openDanhmuc()">
+  <p>Chọn danh mục</p>
+  <i class="fa-light fa-xmark icon-size-5"></i>
+</button>
+
+<p-table id="table" #danhmuc [value]="columns" dataKey="id" responsiveLayout="scroll" [scrollable]="true"
+  [columns]="columns">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 10%;">STT</th>
+      <th style="width: 40%;">Tên trường thông tin SYLL</th>
+      <th style="width: 50%;">Thông tin lý lịch được cập nhật bổ sung</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-columns="columns" let-i="rowIndex">
+    <tr>
+      <td style="width: 10%;">{{ i+1 }}</td>
+      <td style="width: 40%;">{{ columns[i].name }}</td>
+      <td style="width: 50%;">
+        <input type="text" matInput placeholder="" name="namTotnghiep" [(ngModel)]="obj[columns[i].field]" required/>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<button mat-raised-button color="primary" (click)="save()">
+  <p>Save</p>
+  <i class="fa-light fa-xmark icon-size-5"></i>
+</button>
+
+<div *ngFor="let item of listDate; let i = index">
+  <mat-form-field class="fuse-mat-no-subscript w-full">
+      <input matInput [matDatepicker]="endDate" name="i"
+          [(ngModel)]="listDate[i]" />
+      <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+      <mat-datepicker #endDate></mat-datepicker>
+  </mat-form-field>
+</div>

@@ -1,0 +1,22 @@
+<form class="tp-form">
+    <span>{{body}}</span>
+    <mat-form-field class="tp-full-width">
+        <input matInput placeholder="Favorite Food" value="Pasta">
+    </mat-form-field>
+    <mat-form-field class="tp-full-width">
+        <textarea matInput placeholder="Enter your comment"></textarea>
+    </mat-form-field>
+    <mat-form-field class="tp-full-width">
+        <input matInput placeholder="Email">
+
+    </mat-form-field>
+    <h4>mat-select</h4>
+    <mat-form-field>
+        <mat-label>Choose an option</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let degreeTitle of listData" [value]="degreeTitle">{{ degreeTitle}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>
+
+<button [style.color]='color'>{{body}}</button>

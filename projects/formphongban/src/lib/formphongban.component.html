@@ -1,0 +1,38 @@
+<div class="form-container">
+
+    <!-- Header -->
+    <div class="form-header">
+        <div class="form-header-title search-head">
+            <span>Phòng ban</span>
+            <mat-form-field class="form-filter">
+                <input #textInput autofocus="true" class="form-filter-input" matInput type="text"
+                    (input)="tree._filter(textInput.value)" placeholder="Tìm kiếm">
+            </mat-form-field>
+        </div>
+        <div style="display: flex;">
+            <button [hidden]="!data?.boChon" class="header-button" mat-icon-button matTooltip="Bỏ chọn" [tabIndex]="0" (click)="unSelectAndClose()">
+                <i class="fal fa-circle-minus icon-size-6"></i>
+            </button>
+            <button class="header-button" mat-icon-button matTooltip="Chọn" [tabIndex]="0" (click)="saveAndClose()">
+                <i class="fal fa-check-circle icon-size-6"></i>
+            </button>
+            <button mat-icon-button matTooltip="Đóng" [tabIndex]="-1" (click)="onClose()">
+                <i class="fa-light fa-xmark icon-size-6"></i>
+            </button>
+        </div>
+    </div>
+
+    <div #mainns class="form-content h-modal" style="position: relative; height: 100%;">
+        <div style="padding: 8px; height: 95%">
+            <p-tree *ngIf="selectionMode != null && selectionMode != 'single'; else elseBlock" styleClass="tree" #tree [value]="hienthiPBcu ? phongBan : phongBanMoi" scrollHeight="{{mainns.offsetHeight - 98}}px" [selectionMode]="selectionMode" [propagateSelectionDown]='false' [propagateSelectionUp]='false' [(selection)]="listSelected"></p-tree>
+
+            <ng-template #elseBlock>
+                <p-tree styleClass="tree" #tree [value]="hienthiPBcu ? phongBan : phongBanMoi" scrollHeight="{{mainns.offsetHeight - 98}}px" selectionMode="single" [(selection)]="selected" (onNodeSelect)="saveAndClose()"></p-tree>
+            </ng-template>
+        </div>
+        <div style="height: 5%; display: flex; align-items: center; padding: 0 8px;">
+            <mat-checkbox name="hienthi" style="margin-right: 4px;" [(ngModel)]="hienthiPBcu"></mat-checkbox>
+            <label class="mat-field-label" for="hienthi">Hiển thị các phong ban cũ</label>
+        </div>
+    </div>
+</div>

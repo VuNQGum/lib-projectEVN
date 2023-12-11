@@ -1,0 +1,74 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "custom-button2": [
+        "dist/custom-button2/custom-button2",
+        "dist/custom-button2"
+      ],
+      "formdanhmucchung": [
+        "dist/formdanhmucchung/formdanhmucchung",
+        "dist/formdanhmucchung"
+      ],
+      "formdonvi": [
+        "dist/formdonvi/formdonvi",
+        "dist/formdonvi"
+      ],
+      "formdonvi-tree": [
+        "dist/formdonvi-tree/formdonvi-tree",
+        "dist/formdonvi-tree"
+      ],
+      "formnhansu": [
+        "dist/formnhansu/formnhansu",
+        "dist/formnhansu"
+      ],
+      "formnhansu-donvi": [
+        "dist/formnhansu-donvi/formnhansu-donvi",
+        "dist/formnhansu-donvi"
+      ],
+      "formnnghecnkt": [
+        "dist/formnnghecnkt/formnnghecnkt",
+        "dist/formnnghecnkt"
+      ],
+      "formphongban": [
+        "dist/formphongban/formphongban",
+        "dist/formphongban"
+      ],
+      "formquyetdinh": [
+        "dist/formquyetdinh/formquyetdinh",
+        "dist/formquyetdinh"
+      ],
+      "modal-nhansu": [
+        "dist/modal-nhansu/modal-nhansu",
+        "dist/modal-nhansu"
+      ]
+    },
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2017",
+    "module": "es2020",
+    "lib": [
+      "es2020",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

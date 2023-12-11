@@ -1,0 +1,72 @@
+<div #form class="form-container">
+
+    <!-- Header -->
+    <div class="form-header">
+        <div class="form-header-title search-head">
+            <span>Đơn vị</span>
+            <mat-form-field class="form-filter" style="margin-left: 16px;">
+                <input #textInput autofocus="true" class="form-filter-input" matInput type="text"
+                    (input)="dtdonvi.filterGlobal(textInput.value, 'contains')" placeholder="Search keyword">
+            </mat-form-field>
+        </div>
+        <div class="flex">
+            <button mat-icon-button style="margin-right: 8px;" [tabIndex]="0" (click)="saveAndClose()">
+                <i class="fal fa-check-circle icon-size-6"></i>
+            </button>
+            <button mat-icon-button [tabIndex]="-1" (click)="onClose()">
+                <i class="fa-light fa-xmark icon-size-6"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div #maindv class="form-content h-modal">
+        <!-- Multiple Select -->
+        <p-table *ngIf="selectionMode != null && selectionMode != 'single'; else elseBlock" id="table" #dtdonvi
+            [value]="data.donvis" [(selection)]="listSelected" responsiveLayout="scroll" [scrollable]="true"
+            dataKey="organizationId" [globalFilterFields]="['orgName','shortName']"
+            scrollHeight="{{maindv.offsetHeight}}px" selectionMode="multiple">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 10%" class="text-center">
+                        <p-tableHeaderCheckbox style="margin: 0 auto"></p-tableHeaderCheckbox>
+                    </th>
+                    <th pSortableColumn="orgName" style="width: 65%;">Tên đơn vị</th>
+                    <th pSortableColumn="shortName" style="width: 25%;">Tên viết tắt</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-org>
+                <tr [pSelectableRow]="org">
+                    <td style="width: 10%">
+                        <p-tableCheckbox [pSelectableRow]="org" style="margin: 0 auto" [value]="org"></p-tableCheckbox>
+                    </td>
+                    <td style="width: 65%;">{{org.orgName}}</td>
+                    <td style="width: 25%;">{{org?.shortName}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+        <ng-template #elseBlock>
+            <!-- Single Select -->
+            <p-table id="table" #dtdonvi [value]="data.donvis" selectionMode="single" dataKey="organizationId"
+                responsiveLayout="scroll" scrollHeight="{{maindv.offsetHeight}}px"
+                [globalFilterFields]="['orgName','shortName']" [scrollable]="true" [(selection)]="selected">
+                <ng-template pTemplate="header">
+                    <tr style="width: 100%;">
+                        <!-- <th>Id</th> -->
+                        <!-- <th pSortableColumn="orgCode" style="flex: 0 0 15%;">Mã đơn vị</th> -->
+                        <th pSortableColumn="orgName" style="width: 70%;">Tên đơn vị</th>
+                        <th pSortableColumn="shortName" style="width: 30%;">Tên viết tắt</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-org>
+                    <tr [pSelectableRow]="org" (dblclick)="onRowSelect($event, org)">
+                        <!-- <td style="flex: 0 0 15%;">{{org.orgCode}}</td> -->
+                        <td style="width: 70%;">{{org.orgName}}</td>
+                        <td style="width: 30%;">{{org?.shortName}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-template>
+    </div>
+</div>

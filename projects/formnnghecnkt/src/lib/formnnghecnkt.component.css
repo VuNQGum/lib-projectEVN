@@ -1,0 +1,104 @@
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 80rem;
+    overflow: hidden;
+    max-height: 100vh ;
+    margin: -1.5rem;
+}
+
+.form-header {
+    color: rgba(255,255,255, 1);
+    background-color: rgba(79,70,229, 1) ;
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem
+}
+
+.form-header-title {
+    font-weight: 500;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.form-content {
+    width: 100%;
+    /* max-height: 32rem; */
+    flex: 1 1 auto;
+}
+
+.h-modal {
+    height: 600px !important;
+    min-width: 650px;
+}
+
+.form-filter {
+    margin-left: 16px;
+}
+
+.header-button {
+    margin-right: 16px;
+}
+
+:host ::ng-deep .p-tree {
+    height: 100%;
+}
+
+/* Computer */
+@media screen and (min-width: 960px){
+    .h-modal {
+        min-width: 650px;
+    }
+    .form-filter {
+        width: 360px;
+    }
+    .form-filter .form-filter-input {
+        width: 300px;
+    }
+}
+
+/* Tablet */
+@media screen and (max-width: 959px){
+
+}
+
+/* Phone */
+@media screen and (max-width: 600px){
+    .h-modal {
+        min-width: fit-content;
+    }
+
+    .form-header-title > span {
+        display: none
+    }
+
+    .form-filter {
+        margin-left: 0px;
+    }
+
+    .form-filter-input {
+        margin-left: 0px;
+    }
+
+    .header-button {
+        margin-right: 0px;
+    }
+
+    .tree {
+        padding: 0px !important;
+    }
+}
+
+/* Height responsive */
+@media only screen and (max-height: 768px) and (-webkit-min-device-pixel-ratio: 1) {
+    .h-modal {
+        height: 100vh !important;
+    }
+}
+

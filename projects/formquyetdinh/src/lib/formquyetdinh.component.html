@@ -1,0 +1,53 @@
+<div class="form-container">
+
+    <!-- Header -->
+    <div class="form-header">
+        <div class="form-header-title search-head">
+            <span>Quyết định</span>
+            <mat-form-field class="form-filter" style="margin-left: 16px;">
+                <input #textInput autofocus="true" class="form-filter-input" matInput type="text"
+                    (input)="dtns.filterGlobal(textInput.value, 'contains')" placeholder="Tìm kiếm">
+            </mat-form-field>
+        </div>
+        <div class="flex">
+            <button class="header-button" mat-icon-button matTooltip="Bỏ chọn" [tabIndex]="0" (click)="unSelectAndClose()">
+                <i class="fal fa-circle-minus icon-size-6"></i>
+            </button>
+            <button mat-icon-button style="margin-right: 8px;" [tabIndex]="0" (click)="saveAndClose()">
+                <i class="fal fa-check-circle icon-size-6"></i>
+            </button>
+            <button mat-icon-button [tabIndex]="-1" (click)="onClose()">
+                <i class="fa-light fa-xmark icon-size-6"></i>
+            </button>
+        </div>
+    </div>
+
+    <div #mainns class="form-content h-modal">
+        <p-table #dtns id="table" [value]="data" selectionMode="single" dataKey="qdinhId" responsiveLayout="scroll"
+            scrollHeight="{{mainns.offsetHeight - 73}}px"
+            [globalFilterFields]="['ngayky','namqd','soQd', 'nguoiky', 'noiDung']" [scrollable]="true"
+            [(selection)]="selected"
+            [paginator]="true" paginatorDropdownScrollHeight="{{mainns.offsetHeight}}px"
+            [rows]="50" paginatorPosition="bottom" [alwaysShowPaginator]="true"
+            [showCurrentPageReport]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="ngayky" style="width: 15%;">Ngày ký</th>
+                    <th pSortableColumn="namqd" style="width: 10%;">Năm</th>
+                    <th pSortableColumn="soQd" style="width: 20%;">Số quyết định</th>
+                    <th pSortableColumn="nguoiky" style="width: 27.5%;">Người ký</th>
+                    <th pSortableColumn="noiDung" style="width: 37.5%;">Nội dung</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-nhansu>
+                <tr [pSelectableRow]="nhansu" (dblclick)="onRowSelect($event, nhansu)">
+                    <td style="width: 15%; word-break: break-word;">{{nhansu?.ngayKy | date: "dd/MM/yyyy"}}</td>
+                    <td style="width: 10%;">{{nhansu?.namqd}}</td>
+                    <td style="width: 20%; word-break: break-word;">{{nhansu.soQd}}</td>
+                    <td style="width: 27.5%; word-break: break-word;">{{nhansu.nguoiky}}</td>
+                    <td style="width: 37.5%; word-break: break-word;">{{nhansu.noiDung}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

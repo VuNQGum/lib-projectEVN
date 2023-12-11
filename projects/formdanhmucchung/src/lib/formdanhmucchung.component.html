@@ -1,0 +1,75 @@
+<div #form class="form-container">
+
+    <!-- Header -->
+    <div class="form-header">
+        <div class="form-header-title search-head">
+            <span>{{data.title}}</span>
+            <mat-form-field class="form-filter" style="margin-left: 16px;">
+                <input #textInput autofocus="true" class="form-filter-input" matInput type="text"
+                    (input)="danhmuc.filterGlobal(textInput.value, 'contains')" placeholder="Search keyword">
+            </mat-form-field>
+        </div>
+        <div class="flex">
+            <button mat-icon-button style="margin-right: 8px;" [tabIndex]="0" (click)="saveAndClose()">
+                <i class="fal fa-check-circle icon-size-6"></i>
+            </button>
+            <button mat-icon-button [tabIndex]="-1" (click)="onClose()">
+                <i class="fa-light fa-xmark icon-size-6"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div #maindv class="form-content h-modal" [ngStyle]="{'min-width':data.width}">
+        <!-- Multiple Select -->
+        <p-table *ngIf="selectionMode != null && selectionMode != 'single'; else elseBlock" id="table" #danhmuc
+            [value]="data.data" [(selection)]="listSelected" responsiveLayout="scroll" [scrollable]="true"
+            [dataKey]="idField" [globalFilterFields]="globalFilterFields"
+            scrollHeight="{{maindv.offsetHeight}}px" selectionMode="multiple"
+            [columns]="data.columns">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th style="width: 10%" class="text-center">
+                        <p-tableHeaderCheckbox style="margin: 0 auto"></p-tableHeaderCheckbox>
+                    </th>
+                    <th *ngFor="let col of columns" [ngStyle]="col.styles" [pSortableColumn]="col.header">
+                        {{ col.header }}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData">
+                    <td style="width: 10%">
+                        <p-tableCheckbox [pSelectableRow]="rowData" style="margin: 0 auto" [value]="rowData"></p-tableCheckbox>
+                    </td>
+                    <td *ngFor="let col of columns" [ngStyle]="col.styles">
+                        {{ rowData[col.field] }}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+        <ng-template #elseBlock>
+            <!-- Single Select -->
+            <p-table id="table" #danhmuc [value]="data.data" selectionMode="single" [dataKey]="idField"
+                responsiveLayout="scroll" scrollHeight="{{maindv.offsetHeight}}px"
+                [globalFilterFields]="globalFilterFields" [scrollable]="true" [(selection)]="selected"
+                [columns]="data.columns">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns" [ngStyle]="col.styles" [pSortableColumn]="col.field">
+                            {{ col.header }}
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr [pSelectableRow]="rowData" (dblclick)="onRowSelect($event, rowData)">
+                        <td *ngFor="let col of columns" [ngStyle]="col.styles">
+                            {{ rowData[col.field] }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-template>
+    </div>
+</div>
