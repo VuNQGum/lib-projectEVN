@@ -16,6 +16,8 @@ export class FormphongbanComponent implements OnInit {
   phongBan!: TreeNode[]
   phongBanMoi!: TreeNode[]
   selectionMode = 'single';
+  // Tên trường xác định phòng ban cũ, mới
+  activeField: string = 'ttrangHdong';
 
   hienthiPBcu: boolean = false;
   constructor(
@@ -26,6 +28,9 @@ export class FormphongbanComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data.selectionMode) this.selectionMode = this.data.selectionMode;
+
+    if (this.data.activeField) this.activeField = this.data.activeField;
+    // Khởi tạo danh sách đã chọn ban đầu (đệ quy tìm cây)
     if (this.data.listSelected) {
       let selectes = this.data.listSelected.filter((item: {
         active: number;
@@ -39,28 +44,23 @@ export class FormphongbanComponent implements OnInit {
       this.listSelected = selectes;
     }
 
+    // Khởi tạo danh sách cây danh mục
     this.phongBan = this.data.phongBan.filter((item: { parentId: null; }) => item.parentId == null)
-      .map((e: {
-        active: number; ttrangHdong: number;
-        id: any; name: any;
-      }) => {
+      .map((e: any) => {
         let result = {
           key: e.id,
           label: e.name,
           data: e,
           styleClass: "font-bold",
         }
-        if ((e.ttrangHdong && e.ttrangHdong != 1) || (e.active && e.active != 1)) result.styleClass += ' text-red-500'
+        if ((e.active && e.active != 1) || (e[this.activeField]) && (e[this.activeField] != 1)) result.styleClass += ' text-red-500'
         return result
       });
     this.phongBan.forEach(element => {
       this.findChildren(this.data.phongBan, element);
     });
 
-    this.phongBanMoi = this.data.phongBan.filter((item: {
-      active: number;
-      ttrangHdong: number; parentId: null;
-    }) => (item.parentId == null && (item?.ttrangHdong == 1 || item?.active == 1))).map((e: { id: any; name: any; }) => ({
+    this.phongBanMoi = this.data.phongBan.filter((item: any) => (item.parentId == null && (item?.active == 1 || item[this.activeField] == 1))).map((e: { id: any; name: any; }) => ({
       key: e.id,
       label: e.name,
       data: e,
@@ -72,17 +72,14 @@ export class FormphongbanComponent implements OnInit {
   }
 
   findChildren(donvis: any[], element: TreeNode<any>) {
-    element.children = donvis.filter((item: { parentId: any; }) => (item.parentId && item.parentId == element.data.id)).map((e: {
-      active: number; ttrangHdong: number;
-      id: any; name: any;
-    }) => {
+    element.children = donvis.filter((item: { parentId: any; }) => (item.parentId && item.parentId == element.data.id)).map((e: any) => {
       let result = {
         key: e.id,
         label: e.name,
         data: e,
         styleClass: "font-normal",
       }
-      if ((e.ttrangHdong && e.ttrangHdong != 1) || (e.active && e.active != 1)) result.styleClass += ' text-red-500'
+      if ((e.active && e.active != 1) || (e[this.activeField]) && (e[this.activeField] != 1)) result.styleClass += ' text-red-500'
       return result
     })
     if (element.children && element.children.length > 0 && !element.styleClass?.includes('font-bold')) {
@@ -94,10 +91,7 @@ export class FormphongbanComponent implements OnInit {
   }
 
   findChildrenMoi(donvis: any[], element: TreeNode<any>) {
-    element.children = donvis.filter((item: {
-      active: number;
-      ttrangHdong: number; parentId: any;
-    }) => (item.parentId && item.parentId == element.data.id && (item.ttrangHdong == 1 || item?.active == 1))).map((e: { id: any; name: any; }) => ({
+    element.children = donvis.filter((item: any) => (item.parentId && item.parentId == element.data.id && (item?.active == 1 || item[this.activeField] == 1))).map((e: { id: any; name: any; }) => ({
       key: e.id,
       label: e.name,
       data: e,
@@ -112,6 +106,8 @@ export class FormphongbanComponent implements OnInit {
   }
 
   saveAndClose(): void {
+    console.log(this.selected);
+
     if (this.selectionMode != 'single' && this.listSelected) {
       this.matDialogRef.close(this.listSelected);
     } else {

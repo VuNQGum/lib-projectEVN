@@ -24,10 +24,12 @@
 
     <div #mainns class="form-content h-modal" style="position: relative; height: 100%;">
         <div style="padding: 8px; height: 95%">
-            <p-tree *ngIf="selectionMode != null && selectionMode != 'single'; else elseBlock" styleClass="tree" #tree [value]="hienthiPBcu ? phongBan : phongBanMoi" scrollHeight="{{mainns.offsetHeight - 98}}px" [selectionMode]="selectionMode" [propagateSelectionDown]='false' [propagateSelectionUp]='false' [(selection)]="listSelected"></p-tree>
+            <p-tree *ngIf="selectionMode != null && selectionMode != 'single'; else elseBlock" styleClass="tree" #tree [value]="hienthiPBcu ? phongBan : phongBanMoi" scrollHeight="{{mainns.offsetHeight - 98}}px" [selectionMode]="selectionMode" [propagateSelectionDown]='false' [propagateSelectionUp]='false' [(selection)]="listSelected">
+            </p-tree>
 
             <ng-template #elseBlock>
-                <p-tree styleClass="tree" #tree [value]="hienthiPBcu ? phongBan : phongBanMoi" scrollHeight="{{mainns.offsetHeight - 98}}px" selectionMode="single" [(selection)]="selected" (onNodeSelect)="saveAndClose()"></p-tree>
+                <p-tree styleClass="tree" #tree [value]="hienthiPBcu ? phongBan : phongBanMoi" scrollHeight="{{mainns.offsetHeight - 98}}px" selectionMode="single" [(selection)]="selected" (dblclick)="saveAndClose()">
+                </p-tree>
             </ng-template>
         </div>
         <div style="height: 5%; display: flex; align-items: center; padding: 0 8px;">
