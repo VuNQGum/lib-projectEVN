@@ -25,7 +25,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Using
 Using with dialog:
-
+```
     openDonvi() {
         const dialogRef = this._matDialog.open(FormdonviComponent, {
             disableClose: false,
@@ -41,8 +41,9 @@ Using with dialog:
 
             });
     }
+```
 Data:
-
+```
     data = [
         {
             "organizationId": 124,
@@ -54,3 +55,4 @@ Data:
             "shortName": "EVN" // Using to show
         },
     ]
+```

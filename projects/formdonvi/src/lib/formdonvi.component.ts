@@ -16,6 +16,7 @@ export class FormdonviComponent implements OnInit {
   listSelected: any[] = [];
   scrollHeight = '960px';
   selectionMode = 'single'
+  idField = 'organizationId';
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   constructor(
@@ -27,6 +28,7 @@ export class FormdonviComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data.selectionMode) this.selectionMode = this.data.selectionMode
+    if (this.data.idField)  this.idField = this.data.idField;
   }
 
   onRowSelect(event: any, selected: any) {

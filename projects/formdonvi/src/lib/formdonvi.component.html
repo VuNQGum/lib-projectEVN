@@ -24,7 +24,7 @@
         <!-- Multiple Select -->
         <p-table *ngIf="selectionMode != null && selectionMode != 'single'; else elseBlock" id="table" #dtdonvi
             [value]="data.donvis" [(selection)]="listSelected" responsiveLayout="scroll" [scrollable]="true"
-            dataKey="organizationId" [globalFilterFields]="['orgName','shortName']"
+            [dataKey]="idField" [globalFilterFields]="['orgName','shortName']"
             scrollHeight="{{maindv.offsetHeight}}px" selectionMode="multiple">
             <ng-template pTemplate="header">
                 <tr>
@@ -48,7 +48,7 @@
 
         <ng-template #elseBlock>
             <!-- Single Select -->
-            <p-table id="table" #dtdonvi [value]="data.donvis" selectionMode="single" dataKey="organizationId"
+            <p-table id="table" #dtdonvi [value]="data.donvis" selectionMode="single" [dataKey]="idField"
                 responsiveLayout="scroll" scrollHeight="{{maindv.offsetHeight}}px"
                 [globalFilterFields]="['orgName','shortName']" [scrollable]="true" [(selection)]="selected">
                 <ng-template pTemplate="header">

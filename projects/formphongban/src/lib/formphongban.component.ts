@@ -106,8 +106,6 @@ export class FormphongbanComponent implements OnInit {
   }
 
   saveAndClose(): void {
-    console.log(this.selected);
-
     if (this.selectionMode != 'single' && this.listSelected) {
       this.matDialogRef.close(this.listSelected);
     } else {
