@@ -13,6 +13,7 @@ import { FormdonviTreeComponent } from 'formdonvi-tree';
 })
 export class FormnhansuDonviComponent implements OnInit {
   @ViewChild('dtns') dtns: any;
+  @ViewChild('caption') caption: any
   donvis: any[] = [];
   selectedDonvi: any;
   nhansus: any[] = [];
@@ -32,7 +33,7 @@ export class FormnhansuDonviComponent implements OnInit {
     if (this.data.selectionMode) this.selectionMode = this.data.selectionMode;
     if (this.data.listSelected) this.listSelected = this.data.listSelected;
     if (this.data.idField) this.idField = this.data.idField
-    
+
     if (this.data.userDonvi) {
       this.selectedDonvi = {
         organizationId: this.data.userDonvi.organizationId,
@@ -53,11 +54,11 @@ export class FormnhansuDonviComponent implements OnInit {
     .subscribe((res: any) => {
       if (!res || !res.state) return;
       this.donvis = res.data;
-      this.donvis.push({
-        organizationId: this.data.userDonvi.organizationId,
-        orgName: this.data.userDonvi.orgName,
-        orgCode: this.data.userDonvi.orgCode
-      })
+      // this.donvis.push({
+      //   organizationId: this.data.userDonvi.organizationId,
+      //   orgName: this.data.userDonvi.orgName,
+      //   orgCode: this.data.userDonvi.orgCode
+      // })
     });
   }
 
@@ -83,16 +84,21 @@ export class FormnhansuDonviComponent implements OnInit {
 
   onRowSelect(event: any, selected: any) {
     this.selected = selected;
+    this.selected.tendonvi = this.selectedDonvi.orgName;
     this.matDialogRef.close(selected);
   }
 
   saveAndClose(): void {
     if (this.selectionMode != 'single' && this.listSelected) {
+      this.listSelected.forEach(ns => {
+        ns.tendonvi = this.selectedDonvi.orgName
+      })
       this.matDialogRef.close(this.listSelected);
     } else {
       if (this.selected == undefined || this.selected == null) {
         return;
       }
+      this.selected.tendonvi = this.selectedDonvi.orgName;
       this.matDialogRef.close(this.selected);
     }
   }
