@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
-import { FormnnghecnktComponent } from 'formnnghecnkt';
 import { TreeNode } from 'primeng/api';
 
 @Component({
@@ -27,6 +26,21 @@ export class FormdonviTreeComponent implements OnInit {
       styleClass: "font-bold",
       expanded: true
     }));
+    if (!this.donvis || this.donvis.length == 0) {
+      let rootNode = this.data.donvis[0];
+      this.data.donvis.forEach((element:any) => {
+        if (element.orgLevel < rootNode.orgLevel) {
+          rootNode = element;
+        }
+      });
+      this.donvis = [{
+        key: rootNode.organizationId,
+        label: rootNode.orgName,
+        data: rootNode,
+        styleClass: "font-bold",
+        expanded: true
+      }];
+    }
     this.donvis.forEach(element => {
       this.findChildren(this.data.donvis, element);
     });

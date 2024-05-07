@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="form-header">
         <div class="form-header-title search-head">
-            <span>Phòng ban</span>
+            <span>Đơn vị</span>
             <mat-form-field class="form-filter">
                 <input #textInput autofocus="true" class="form-filter-input" matInput type="text"
                     (input)="tree._filter(textInput.value)" placeholder="Tìm kiếm">
@@ -24,7 +24,7 @@
 
     <div #mainns class="form-content h-modal" style="position: relative; height: 100%;">
         <div style="padding: 8px; height: 100%">
-            <p-tree styleClass="tree" #tree [value]="donvis" scrollHeight="{{mainns.offsetHeight - 50}}px" selectionMode="single" [(selection)]="selected" (onNodeSelect)="saveAndClose()"></p-tree>
+            <p-tree styleClass="tree" #tree [value]="donvis" scrollHeight="{{mainns.offsetHeight - 50}}px" selectionMode="single" [(selection)]="selected" (dblclick)="saveAndClose()"></p-tree>
         </div>
     </div>
 </div>
