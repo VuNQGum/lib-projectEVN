@@ -32,10 +32,7 @@ export class FormphongbanComponent implements OnInit {
     if (this.data.activeField) this.activeField = this.data.activeField;
     // Khởi tạo danh sách đã chọn ban đầu (đệ quy tìm cây)
     if (this.data.listSelected) {
-      let selectes = this.data.listSelected.filter((item: {
-        active: number;
-        ttrangHdong: number; parentId: null;
-      }) => (item?.parentId == null)).map((e: { id: any; name: any; }) => ({
+      let selectes = this.data.listSelected.map((e: { id: any; name: any; }) => ({
         key: e.id,
         label: e.name,
         data: e,

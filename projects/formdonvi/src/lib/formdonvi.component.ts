@@ -29,6 +29,7 @@ export class FormdonviComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.selectionMode) this.selectionMode = this.data.selectionMode
     if (this.data.idField)  this.idField = this.data.idField;
+    if (this.data.listSelected) this.listSelected = this.data.listSelected;
   }
 
   onRowSelect(event: any, selected: any) {

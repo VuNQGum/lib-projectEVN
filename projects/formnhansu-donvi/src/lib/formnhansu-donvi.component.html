@@ -21,7 +21,7 @@
 
     <div #mainns class="form-content h-modal">
         <!-- Multiple Select -->
-        <p-table *ngIf="selectionMode != null && selectionMode != 'single'; else elseBlock" id="table" [value]="nhansus" selectionMode="single" [dataKey]="idField" responsiveLayout="scroll"
+        <p-table *ngIf="selectionMode != null && selectionMode != 'single'; else elseBlock" #dtns id="table" [value]="nhansus" selectionMode="single" [dataKey]="idField" responsiveLayout="scroll"
         scrollHeight="{{mainns.offsetHeight - header.offsetHeight - 48}}px"
         [globalFilterFields]="['sohieu', 'tenkhaisinh','tenphong','vtricdanh']" [scrollable]="true"
         [(selection)]="listSelected" selectionMode="multiple">
@@ -64,7 +64,7 @@
                     <td [style]="data.hthiSohieu? 'width: 25%;' : 'width: 30%'">{{nhansu.tenkhaisinh}}</td>
                     <td [style]="data.hthiSohieu? 'width: 32.5%;' : 'width: 37.5%'">{{nhansu?.phongban ||
                         nhansu?.departmentc1Name || nhansu?.tenphong}}</td>
-                    <td style="width: 30%;">{{nhansu.vtricdanh}}</td>
+                    <td style="width: 30%;">{{nhansu?.vtricdanh || nhansu?.chucdanh}}</td>
                 </tr>
             </ng-template>
         </p-table>
@@ -107,7 +107,7 @@
                         <td [style]="data.hthiSohieu? 'width: 25%;' : 'width: 30%'">{{nhansu.tenkhaisinh}}</td>
                         <td [style]="data.hthiSohieu? 'width: 32.5%;' : 'width: 37.5%'">{{nhansu?.phongban ||
                             nhansu?.departmentc1Name || nhansu?.tenphong}}</td>
-                        <td style="width: 30%;">{{nhansu.vtricdanh}}</td>
+                        <td style="width: 30%;">{{nhansu.vtricdanh || nhansu?.chucdanh}}</td>
                     </tr>
                 </ng-template>
             </p-table>
