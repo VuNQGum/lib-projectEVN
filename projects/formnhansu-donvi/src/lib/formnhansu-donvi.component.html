@@ -23,7 +23,7 @@
         <!-- Multiple Select -->
         <p-table *ngIf="selectionMode != null && selectionMode != 'single'; else elseBlock" #dtns id="table" [value]="nhansus" selectionMode="single" [dataKey]="idField" responsiveLayout="scroll"
         scrollHeight="{{mainns.offsetHeight - header.offsetHeight - 48}}px"
-        [globalFilterFields]="['sohieu', 'tenkhaisinh','tenphong','vtricdanh']" [scrollable]="true"
+        [globalFilterFields]="['sohieu', 'tenkhaisinh','tenphong','vtricdanh', 'chucdanh', 'phongban', 'departmentc1Name']" [scrollable]="true"
         [(selection)]="listSelected" selectionMode="multiple">
             <ng-template pTemplate="caption">
                 <div #caption class="flex items-center justify-between h-12">
@@ -72,7 +72,7 @@
         <ng-template #elseBlock>
             <p-table #dtns id="table" [value]="nhansus" selectionMode="single" [dataKey]="idField" responsiveLayout="scroll"
                 scrollHeight="{{mainns.offsetHeight - 46}}px"
-                [globalFilterFields]="['sohieu', 'tenkhaisinh','tenphong','vtricdanh']" [scrollable]="true"
+                [globalFilterFields]="['sohieu', 'tenkhaisinh','tenphong','vtricdanh', 'chucdanh', 'phongban', 'departmentc1Name']" [scrollable]="true"
                 [(selection)]="selected">
                 <ng-template pTemplate="caption">
                     <div #caption class="flex items-center justify-between">

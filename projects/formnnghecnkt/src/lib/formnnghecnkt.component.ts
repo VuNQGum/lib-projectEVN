@@ -23,7 +23,8 @@ export class FormnnghecnktComponent implements OnInit {
       label: e.name,
       data: e,
       styleClass: "font-bold",
-      selectable: false
+      selectable: false,
+      expanded: true
     }));
     this.nnghe.forEach(element => {
       this.findChildren(this.data.lnhomnghe, this.data.lnghe, element);

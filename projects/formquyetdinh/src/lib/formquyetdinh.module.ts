@@ -16,6 +16,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
+import { DropdownModule } from 'primeng/dropdown';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { CommonModule } from '@angular/common';
     MatInputModule,
     MatMenuModule,
     TableModule,
+    DropdownModule,
+    FormsModule
   ],
   exports: [
     FormquyetdinhComponent

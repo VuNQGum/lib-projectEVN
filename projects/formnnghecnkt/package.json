@@ -1,6 +1,6 @@
 {
   "name": "formnnghecnkt",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "peerDependencies": {
     "@angular/common": "^15.2.9",
     "@angular/core": "^15.2.9"

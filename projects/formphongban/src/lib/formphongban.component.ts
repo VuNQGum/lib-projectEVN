@@ -49,6 +49,7 @@ export class FormphongbanComponent implements OnInit {
           label: e.name,
           data: e,
           styleClass: "font-bold",
+          expanded: true
         }
         if ((e.active && e.active != 1) || (e[this.activeField]) && (e[this.activeField] != 1)) result.styleClass += ' text-red-500'
         return result

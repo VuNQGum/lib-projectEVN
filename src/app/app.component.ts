@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
             "orgObjId": null,
             "orgCode": "EVN",
             "orgName": "Tập đoàn Điện lực Việt Nam",
-            "orgParentId": null,
+            "orgParentId": "ABC",
             "orgLevel": 1,
             "shortName": "EVN"
         },
@@ -4120,7 +4120,7 @@ export class AppComponent implements OnInit {
             "level": 1,
             "show": true,
             "dept_Root_Id": 115000000000130,
-            "active": 1,
+            "isactive": 1,
             "ngayTL": "1989-12-31T17:00:00.000+00:00",
             "ngayKT": null,
             "lydo": "",
@@ -4150,7 +4150,7 @@ export class AppComponent implements OnInit {
             "level": 1,
             "show": true,
             "dept_Root_Id": 115000000010843,
-            "active": 2,
+            "isactive": 2,
             "ngayTL": "2013-02-28T17:00:00.000+00:00",
             "ngayKT": null,
             "lydo": "Thành lập mới sau khi Trung tâm CNTT thành lập lại trực thuộc Tập đoàn ĐL Việt Nam theo QĐ số 565 ngày 6/8/2012",
@@ -4177,7 +4177,7 @@ export class AppComponent implements OnInit {
             "level": 2,
             "show": true,
             "dept_Root_Id": 115000000010843,
-            "active": 2,
+            "isactive": 2,
             "ngayTL": "2021-07-14T17:00:00.000+00:00",
             "ngayKT": null,
             "lydo": "",
@@ -5781,19 +5781,37 @@ export class AppComponent implements OnInit {
                 if (!res || !res.state) return;
                 this.allNhansu = res.data;
             });
+
+        this.httpClient.get<any[]>(
+          'http://10.1.117.153:3003/hrms/employe/v1/donvi/getDsDonviTructhuocNotParent/124', { headers }).pipe(takeUntil(this._unsubscribeAll))
+          .subscribe((res: any) => {
+              if (!res || !res.state) return;
+              this.data = res.data;
+          });
     }
 
     openDonvi() {
-        const dialogRef = this._matDialog.open(FormdonviComponent, {
+        const dialogRef = this._matDialog.open(FormdonviTreeComponent, {
             disableClose: false,
             data: {
                 donvis: this.data,
-                selectionMode: 'checkbox'
+                selectionMode: 'multiple',
+                listSelected: [
+                  {
+                    "organizationId": 124,
+                    "orgObjId": null,
+                    "orgCode": "EVN",
+                    "orgName": "Tập đoàn Điện lực Việt Nam",
+                    "orgParentId": "ABC",
+                    "orgLevel": 1,
+                    "shortName": "EVN"
+                },
+                ]
             }
         });
 
         dialogRef.afterClosed()
-            .subscribe((result) => {
+            .subscribe((result: any) => {
                 console.log(result);
 
             });
@@ -6032,10 +6050,10 @@ export class AppComponent implements OnInit {
         const dialogRef = this._matDialog.open(FormnhansuDonviComponent, {
             disableClose: false,
             data: {
-                apiDonvi: `http://10.1.117.101:3002/hrms/employe/v1/donvi/getDsDonviTructhuoc/115`,
+                apiDonvi: `http://10.1.117.101:3002/hrms/employe/v1/cocaudonvi/listDonviTructhuoc/115`,
                 apiNhansu: `http://10.1.117.101:3002/hrms/employe/v1/hoso/getDsNsCuaDonviFormSelect`,
                 userDonvi: {
-                    organizationId: 115,
+                    organizationId: 51,
                     orgName: 'test'
                 },
                 hthiSohieu: true,
@@ -6057,13 +6075,6 @@ export class AppComponent implements OnInit {
             disableClose: false,
             data: {
                 boChon: false,
-                // phongBan: this.dataPhongBan.map(item => {
-                //     let newItem = JSON.parse(JSON.stringify(item));
-                //     newItem.id = newItem.departmentId;
-                //     newItem.name = newItem.departmentName;
-                //     newItem.parentId = newItem.deptParentId;
-                //     return newItem;
-                // }),
                 phongBan: this.dataPhongBan,
                 selectionMode: 'checkbox',
                 listSelected: [{
@@ -6092,7 +6103,8 @@ export class AppComponent implements OnInit {
                     "chucnang": null,
                     "nhiemvu": null,
                     "deptCC": true
-                },]
+                },],
+                activeField: 'isactive'
             }
         });
 
@@ -6148,7 +6160,7 @@ export class AppComponent implements OnInit {
 
     save() {
         console.log(this.obj);
-        
+
     }
 }
 
