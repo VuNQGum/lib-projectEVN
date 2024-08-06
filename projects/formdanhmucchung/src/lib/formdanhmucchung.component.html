@@ -39,7 +39,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr [pSelectableRow]="rowData">
-                    <td style="width: 10%">
+                    <td style="width: 10%; text-align: center;">
                         <p-tableCheckbox [pSelectableRow]="rowData" style="margin: 0 auto" [value]="rowData"></p-tableCheckbox>
                     </td>
                     <td *ngFor="let col of columns" [ngStyle]="col.styles">

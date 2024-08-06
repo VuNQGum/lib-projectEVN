@@ -56,7 +56,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-nhansu>
                 <tr [pSelectableRow]="nhansu">
-                    <td style="width: 10%">
+                    <td style="width: 10%; text-align: center;">
                         <p-tableCheckbox [pSelectableRow]="nhansu" style="margin: 0 auto" [value]="nhansu"></p-tableCheckbox>
                     </td>
                     <td *ngIf="data.hthiSohieu" style="width: 12.5%; word-break: break-word;">{{nhansu.sohieu}}</td>

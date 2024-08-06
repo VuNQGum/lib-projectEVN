@@ -37,7 +37,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-org>
                 <tr [pSelectableRow]="org">
-                    <td style="width: 10%">
+                    <td style="width: 10%; text-align: center;">
                         <p-tableCheckbox [pSelectableRow]="org" style="margin: 0 auto" [value]="org"></p-tableCheckbox>
                     </td>
                     <td style="width: 65%;">{{org.orgName}}</td>
