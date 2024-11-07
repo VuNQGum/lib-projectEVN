@@ -37,6 +37,7 @@ export class FormphongbanComponent implements OnInit {
         label: e.name,
         data: e,
         styleClass: "font-bold",
+        expanded: true
       }));
       this.listSelected = selectes;
     }
@@ -63,6 +64,7 @@ export class FormphongbanComponent implements OnInit {
       label: e.name,
       data: e,
       styleClass: "font-bold",
+      expanded: true
     }));
     this.phongBanMoi.forEach(element => {
       this.findChildrenMoi(this.data.phongBan, element);

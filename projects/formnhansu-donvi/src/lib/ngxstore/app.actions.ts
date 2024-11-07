@@ -1,0 +1,5 @@
+export const APP_ACTION = {
+    ADD_NOTIFI: 'ADD_NOTIFI',
+    REMOVE_NOTIFI: 'REMOVE_NOTIFI',
+    USER_INFO: 'USER_INFO'
+};

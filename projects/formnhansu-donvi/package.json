@@ -1,9 +1,10 @@
 {
   "name": "formnhansu-donvi",
-  "version": "1.1.4",
+  "version": "1.2.1",
   "peerDependencies": {
-    "@angular/common": "^15.0.0",
-    "@angular/core": "^15.0.0"
+    "@angular/common": "^15.2.9",
+    "@angular/core": "^15.2.9",
+    "@ngrx/store": "^15.2.1"
   },
   "dependencies": {
     "tslib": "^2.3.0"

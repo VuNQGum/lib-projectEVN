@@ -1,6 +1,6 @@
 {
   "name": "formquyetdinh",
-  "version": "1.0.13",
+  "version": "1.0.17",
   "peerDependencies": {
     "@angular/common": "^15.2.9",
     "@angular/core": "^15.2.9"

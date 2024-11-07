@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'lib-formquyetdinh',
@@ -34,6 +35,12 @@ export class FormquyetdinhComponent implements OnInit {
       .subscribe((res: any) => {
         if (!res || !res.state) return;
         this.listQd = res.data;
+
+        this.listQd.forEach(qd => {
+          qd.ngayKyView = formatDate(qd.ngayKy, 'dd/MM/yyyy', 'en-US');
+        })
+        console.log(this.listQd);
+
       });
     }
 
@@ -87,6 +94,9 @@ export class FormquyetdinhComponent implements OnInit {
     .subscribe((res: any) => {
       if (!res || !res.state) return;
       this.listQd = res.data;
+      this.listQd.forEach(qd => {
+        qd.ngayKyView = formatDate(qd.ngayKy, 'dd/MM/yyyy', 'en-US');
+      })
     });
   }
 }

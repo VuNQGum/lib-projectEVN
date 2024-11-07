@@ -10,10 +10,10 @@
             </mat-form-field>
         </div>
         <div class="flex">
-            <button mat-icon-button style="margin-right: 8px;" [tabIndex]="0" (click)="saveAndClose()">
+            <button mat-icon-button style="margin-right: 8px;" [tabIndex]="0" (click)="saveAndClose()" matTooltip="Chọn">
                 <i class="fal fa-check-circle icon-size-6"></i>
             </button>
-            <button mat-icon-button [tabIndex]="-1" (click)="onClose()">
+            <button mat-icon-button [tabIndex]="-1" matTooltip="Đóng" (click)="onClose()">
                 <i class="fa-light fa-xmark icon-size-6"></i>
             </button>
         </div>
@@ -31,9 +31,9 @@
                     <!-- <mat-form-field style="width: 80%;">
                         <input matInput (click)="onChonDonvi()" readonly [(ngModel)]="selectedDonvi.orgName">
                     </mat-form-field> -->
-                    <div class="" style="width: 80%; text-align: center;" (click)="onChonDonvi()">
+                    <div class="" style="width: 80%; text-align: center;" (click)="rightTructhuoc && onChonDonvi()">
                         {{selectedDonvi.orgName}}</div>
-                    <button class="mx-1" color="primary" mat-icon-button (click)="onChonDonvi()"
+                    <button *ngIf="rightTructhuoc" class="mx-1" mat-flat-button (click)="onChonDonvi()"
                         matTooltip="Chọn đơn vị">
                         <!-- <span>Chọn</span> -->
                         <i class="fa-light fa-buildings icon-size-5"></i>
@@ -80,9 +80,9 @@
                         <!-- <mat-form-field style="width: 80%;">
                             <input matInput (click)="onChonDonvi()" readonly [(ngModel)]="selectedDonvi.orgName">
                         </mat-form-field> -->
-                        <div class="" style="width: 80%; text-align: center;" (click)="onChonDonvi()">
+                        <div class="" style="width: 80%; text-align: center;" (click)="rightTructhuoc && onChonDonvi()">
                             {{selectedDonvi.orgName}}</div>
-                        <button class="mx-1" color="primary" mat-button (click)="onChonDonvi()"
+                        <button *ngIf="rightTructhuoc" class="mx-1" color="primary" mat-button (click)="onChonDonvi()"
                             matTooltip="Chọn đơn vị">
                             <!-- <span>Chọn</span> -->
                             <i class="fa-light fa-buildings icon-size-5"></i>

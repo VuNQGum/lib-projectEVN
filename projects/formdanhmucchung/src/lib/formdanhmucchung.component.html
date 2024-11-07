@@ -6,14 +6,17 @@
             <span>{{data.title}}</span>
             <mat-form-field class="form-filter" style="margin-left: 16px;">
                 <input #textInput autofocus="true" class="form-filter-input" matInput type="text"
-                    (input)="danhmuc.filterGlobal(textInput.value, 'contains')" placeholder="Search keyword">
+                    (input)="danhmuc.filterGlobal(textInput.value, 'contains')" placeholder="Tìm kiếm">
             </mat-form-field>
         </div>
         <div class="flex">
-            <button mat-icon-button style="margin-right: 8px;" [tabIndex]="0" (click)="saveAndClose()">
+            <button style="margin-right: 8px;" class="header-button" mat-icon-button matTooltip="Bỏ chọn" [tabIndex]="0" (click)="unSelectAndClose()">
+                <i class="fal fa-circle-minus icon-size-6"></i>
+            </button>
+            <button mat-icon-button style="margin-right: 8px;" matTooltip="Chọn" [tabIndex]="0" (click)="saveAndClose()">
                 <i class="fal fa-check-circle icon-size-6"></i>
             </button>
-            <button mat-icon-button [tabIndex]="-1" (click)="onClose()">
+            <button mat-icon-button [tabIndex]="-1" matTooltip="Đóng" (click)="onClose()">
                 <i class="fa-light fa-xmark icon-size-6"></i>
             </button>
         </div>

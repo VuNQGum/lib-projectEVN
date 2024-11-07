@@ -31,7 +31,7 @@ export class FormdanhmucchungComponent implements OnInit {
     this.data.columns.forEach((column: { field: any; }) => {
       this.globalFilterFields.push(column.field);
     });
-    
+
   }
 
   onRowSelect(event: any, selected: any) {
@@ -49,6 +49,18 @@ export class FormdanhmucchungComponent implements OnInit {
         return;
       }
       this.matDialogRef.close(this.selected);
+    }
+  }
+
+  unSelectAndClose(): void {
+    if (this.selectionMode != 'single' && this.listSelected) {
+      this.matDialogRef.close(this.listSelected);
+    } else {
+      this.matDialogRef.close({
+        data: {
+          [this.idField]: null,
+        }
+      });
     }
   }
 

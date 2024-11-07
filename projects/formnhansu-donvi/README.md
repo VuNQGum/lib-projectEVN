@@ -51,5 +51,7 @@ Data:
         boChon: true,
         selectionMode: 'checkbox',
         listSelected: [],
-        idField: 'nsId' // Gia tri mac dinh la 'nsID'
+        idField: 'nsId' // Gia tri mac dinh la 'nsID',
+        ignoreAuthor: true // Gia tri mac dinh là false (Loai bo phan quyen xem cac dvi truc thuoc),
+        rightTructhuoc: false // Nhan su hien tai co quyen xem cac dvi truc thuoc khong
     }
