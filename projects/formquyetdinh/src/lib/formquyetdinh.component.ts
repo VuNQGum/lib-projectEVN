@@ -7,15 +7,13 @@ import { formatDate } from '@angular/common';
 @Component({
   selector: 'lib-formquyetdinh',
   templateUrl: './formquyetdinh.component.html',
-  styleUrls: [
-    './formquyetdinh.component.css'
-  ]
+  styleUrls: ['./formquyetdinh.component.css'],
 })
 export class FormquyetdinhComponent implements OnInit {
   listYear: any[] = [];
   namQd = new Date().getFullYear();
-  apiGetDsQdByNam = "";
-  idField = "qdinhId";
+  apiGetDsQdByNam = '';
+  idField = 'qdinhId';
 
   selected: any;
   listQd: any[] = [];
@@ -24,24 +22,14 @@ export class FormquyetdinhComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public matDialogRef: MatDialogRef<FormquyetdinhComponent>,
-    private http: HttpClient,
-  ) { }
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
     this.listYear = this.generateYearsList();
     if (this.data.apiGetDsQdByNam) {
       this.apiGetDsQdByNam = this.data.apiGetDsQdByNam;
-      this.http.get(this.apiGetDsQdByNam + '/' + this.data.donviId + '/' + this.namQd).pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((res: any) => {
-        if (!res || !res.state) return;
-        this.listQd = res.data;
-
-        this.listQd.forEach(qd => {
-          qd.ngayKyView = formatDate(qd.ngayKy, 'dd/MM/yyyy', 'en-US');
-        })
-        console.log(this.listQd);
-
-      });
+      this.onLoadData();
     }
 
     if (this.data.idField) {
@@ -58,13 +46,13 @@ export class FormquyetdinhComponent implements OnInit {
     this.matDialogRef.close({
       data: {
         noiDung: null,
-        qdinhId: null
-      }
+        qdinhId: null,
+      },
     });
   }
   /**
-  * Save and close
-  */
+   * Save and close
+   */
   saveAndClose(): void {
     if (this.selected == undefined || this.selected == null) {
       return;
@@ -89,14 +77,42 @@ export class FormquyetdinhComponent implements OnInit {
     return yearsList;
   }
 
-  changeNamqd(event: { value: number; }) {
-    this.http.get(this.apiGetDsQdByNam + '/' + this.data.donviId + '/' + event.value).pipe(takeUntil(this._unsubscribeAll))
-    .subscribe((res: any) => {
-      if (!res || !res.state) return;
-      this.listQd = res.data;
-      this.listQd.forEach(qd => {
-        qd.ngayKyView = formatDate(qd.ngayKy, 'dd/MM/yyyy', 'en-US');
-      })
-    });
+  changeNamqd(event: { value: number }) {
+    this.onLoadData();
+  }
+
+  onLoadData() {
+    this.http
+      .get(this.apiGetDsQdByNam + '/' + this.data.donviId + '/' + this.namQd)
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((res: any) => {
+        if (!res || !res.state) return;
+        let resultData = res.data;
+        if (this.data.dsLoaiQdLoaitru) {
+          // resultData = resultData.filter((item: any) => !this.data.dsLoaiQdLoaitru.includes(item.loaiqd))
+          resultData = resultData.filter((item: any) => {
+            if (!item.loaiqd) return false
+            return this.data.dsLoaiQdBaogom.some(
+              (str: string) => !item.loaiqd?.includes(str)
+            )
+          }
+          );
+        }
+        if (this.data.dsLoaiQdBaogom) {
+          // resultData = resultData.filter((item: any) => this.data.dsLoaiQdBaogom.includes(item.loaiqd))
+          resultData = resultData.filter((item: any) => {
+            if (!item.loaiqd) return false;
+            return this.data.dsLoaiQdBaogom.some((str: string) =>
+              item.loaiqd?.includes(str)
+            );
+          });
+        }
+
+        this.listQd = resultData;
+
+        this.listQd.forEach((qd) => {
+          qd.ngayKyView = formatDate(qd.ngayKy, 'dd/MM/yyyy', 'en-US');
+        });
+      });
   }
 }
