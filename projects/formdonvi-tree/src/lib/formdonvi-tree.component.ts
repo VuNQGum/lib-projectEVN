@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { TreeNode } from 'primeng/api';
 
@@ -10,8 +10,15 @@ import { TreeNode } from 'primeng/api';
   ]
 })
 export class FormdonviTreeComponent implements OnInit {
+  @ViewChild('tree') tree: any;
+
   selected: any;
+  listSelected: TreeNode[] = [];
+
   donvis!: TreeNode[]
+  selectionMode = 'single';
+  enableSelectDown = false; // Cho phép chọn cả các nút con của nút hiện tại
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public matDialogRef: MatDialogRef<FormdonviTreeComponent>,
@@ -19,6 +26,22 @@ export class FormdonviTreeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (this.data.selectionMode) this.selectionMode = this.data.selectionMode;
+    if (this.data.enableSelectDown) this.enableSelectDown = this.data.enableSelectDown;
+
+    // Khởi tạo danh sách đã chọn ban đầu (đệ quy tìm cây)
+    if (this.data.listSelected) {
+      let selectes = this.data.listSelected.map((e: { organizationId: any; orgName: any; }) => ({
+        key: e.organizationId,
+        label: e.orgName,
+        data: e,
+        styleClass: "font-bold",
+        expanded: true
+      }));
+      this.listSelected = selectes;
+    }
+
+    // Khởi tạo danh sách cây danh mục
     this.donvis = this.data.donvis.filter((item: { orgParentId: null; }) => item.orgParentId == null).map((e: { organizationId: any; orgName: any; }) => ({
       key: e.organizationId,
       label: e.orgName,
@@ -62,19 +85,27 @@ export class FormdonviTreeComponent implements OnInit {
   }
 
   saveAndClose(): void {
-    if (this.selected == undefined || this.selected == null) {
-      return;
+    if (this.selectionMode != 'single' && this.listSelected) {
+      this.matDialogRef.close(this.listSelected);
+    } else {
+      if (this.selected == undefined || this.selected == null) {
+        return;
+      }
+      this.matDialogRef.close(this.selected);
     }
-    this.matDialogRef.close(this.selected);
   }
 
   unSelectAndClose(): void {
-    this.matDialogRef.close({
-      data: {
-        orgName: null,
-        organizationId: null
-      }
-    });
+    if (this.selectionMode != 'single' && this.listSelected) {
+      this.matDialogRef.close(this.listSelected);
+    } else {
+      this.matDialogRef.close({
+        data: {
+          orgName: null,
+          organizationId: null
+        }
+      });
+    }
   }
 
   onClose(): void {

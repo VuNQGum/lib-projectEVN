@@ -13,6 +13,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TreeModule } from 'primeng/tree';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -21,6 +22,7 @@ import { TreeModule } from 'primeng/tree';
     FormdonviTreeComponent
   ],
   imports: [
+    CommonModule,
     MatCheckboxModule,
     MatTooltipModule,
     MatBadgeModule,

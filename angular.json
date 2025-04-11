@@ -414,5 +414,8 @@
       }
     }
   },
-  "defaultProject": "lib-project2"
+  "defaultProject": "lib-project2",
+  "cli": {
+    "analytics": false
+  }
 }

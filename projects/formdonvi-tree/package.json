@@ -1,6 +1,6 @@
 {
   "name": "formdonvi-tree",
-  "version": "1.0.10",
+  "version": "1.0.14",
   "peerDependencies": {
     "@angular/common": "^15.0.0",
     "@angular/core": "^15.0.0"

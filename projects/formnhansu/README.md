@@ -38,7 +38,9 @@ Using with dialog:
 
             });
     }
+
 Data:
+
     dataNhansu = {
         selectionMode: 'single',
         nhansus: this.dataNhansu, // similar to listSelected

@@ -41,7 +41,7 @@ Using with dialog:
 ```
 Data:
 ```
-    dataNhansuDonvi = {
+    dataPhongBan = {
         {
             boChon: false,
             phongBan: this.dataPhongBan, // Data tương tự trường listSelected

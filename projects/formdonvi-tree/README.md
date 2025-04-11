@@ -31,7 +31,11 @@ Using with dialog:
         disableClose: false,
         data: {
             donvis: this.listDonvi,
-            boChon: true
+            boChon: true,
+            selectionMode: 'checkbox', // Mặc định là 'single'
+
+            selected: this.listDonvi[0], // TH selectionMode là 'single'
+            listSelected: [this.listDonvi[0], this.listDonvi[1]] // TH selectionMode là 'multiple' hoặc 'checkbox'
         }
         });
 
@@ -42,9 +46,9 @@ Using with dialog:
     }
 Data:
 
-    dataNhansuDonvi = {
+    listDonvi = [{
         orgName: null,
         organizationId: null,
         orgParentId: null,
         orgCode: null
-    }
+    },]

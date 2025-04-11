@@ -26,7 +26,7 @@
         <!-- Multiple Select -->
         <p-table *ngIf="selectionMode != null && selectionMode != 'single'; else elseBlock" id="table" #dtns
             [value]="data.nhansus" [(selection)]="listSelected" responsiveLayout="scroll" [scrollable]="true"
-            [dataKey]="idField" [globalFilterFields]="['tenkhaisinh','phongban','departmentc1Name','chucdanh']"
+            [dataKey]="idField" [globalFilterFields]="['tenkhaisinh','phongban','departmentc1Name','chucdanh','vtricdanh', 'tenphong']"
             scrollHeight="{{mainns.offsetHeight}}px" selectionMode="multiple">
             <ng-template pTemplate="header">
                 <tr>
@@ -54,7 +54,7 @@
             <!-- Single Select -->
             <p-table #dtns id="table" [value]="data.nhansus" selectionMode="single" [dataKey]="idField" responsiveLayout="scroll"
                 scrollHeight="{{mainns.offsetHeight}}px"
-                [globalFilterFields]="['tenkhaisinh','phongban','departmentc1Name','chucdanh']" [scrollable]="true"
+                [globalFilterFields]="['tenkhaisinh','phongban','departmentc1Name','chucdanh','vtricdanh', 'tenphong']" [scrollable]="true"
                 [(selection)]="selected">
                 <ng-template pTemplate="header">
                     <tr>

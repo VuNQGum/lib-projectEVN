@@ -87,7 +87,7 @@ export class FormnhansuDonviComponent implements OnInit {
         this.http.get(`https://smartevn-test.evn.com.vn/hrms/employe/v1/home/listRights`).pipe(takeUntil(this._unsubscribeAll)).subscribe((res: any) => {
           if (!res || !res.state) return;
           let rights = res.data;
-          if (rights.some((right: { role: any; }) => right.role == 'RIGHT_TRUCTHUOC')) {
+          if (rights.some((right: { role: any; }) => right.role.includes('RIGHT_TT'))) {
             this.rightTructhuoc = true;
           }
         })
