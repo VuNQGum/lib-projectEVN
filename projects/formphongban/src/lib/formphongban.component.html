@@ -24,7 +24,7 @@
 
     <div #mainns class="form-content h-modal" style="position: relative; height: 100%;">
         <div style="padding: 8px; height: 95%">
-            <p-tree *ngIf="selectionMode != null && selectionMode != 'single'; else elseBlock" styleClass="tree" #tree [value]="hienthiPBcu ? phongBan : phongBanMoi" scrollHeight="{{mainns.offsetHeight - 98}}px" [selectionMode]="selectionMode" [propagateSelectionDown]='false' [propagateSelectionUp]='false' [(selection)]="listSelected">
+            <p-tree *ngIf="selectionMode != null && selectionMode != 'single'; else elseBlock" styleClass="tree" #tree [value]="hienthiPBcu ? phongBan : phongBanMoi" scrollHeight="{{mainns.offsetHeight - 98}}px" [selectionMode]="selectionMode" [propagateSelectionDown]="propagateSelection" [propagateSelectionUp]="propagateSelection" [(selection)]="listSelected">
             </p-tree>
 
             <ng-template #elseBlock>

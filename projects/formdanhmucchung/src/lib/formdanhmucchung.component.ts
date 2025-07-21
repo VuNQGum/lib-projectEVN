@@ -31,7 +31,8 @@ export class FormdanhmucchungComponent implements OnInit {
     this.data.columns.forEach((column: { field: any; }) => {
       this.globalFilterFields.push(column.field);
     });
-
+    if (this.data.listSelected) this.listSelected = this.data.listSelected;
+    if (this.data.selected) this.selected = this.data.selected;
   }
 
   onRowSelect(event: any, selected: any) {

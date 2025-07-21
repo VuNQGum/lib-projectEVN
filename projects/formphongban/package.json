@@ -1,6 +1,6 @@
 {
   "name": "formphongban",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "peerDependencies": {
     "@angular/common": "^15.0.0",
     "@angular/core": "^15.0.0"

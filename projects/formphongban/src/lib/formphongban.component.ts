@@ -19,6 +19,8 @@ export class FormphongbanComponent implements OnInit {
   // Tên trường xác định phòng ban cũ, mới
   activeField: string = 'ttrangHdong';
 
+  propagateSelection: boolean = false;
+
   hienthiPBcu: boolean = false;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -28,6 +30,7 @@ export class FormphongbanComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data.selectionMode) this.selectionMode = this.data.selectionMode;
+    if (this.data.propagateSelection) this.propagateSelection = this.data.propagateSelection;
 
     if (this.data.activeField) this.activeField = this.data.activeField;
     // Khởi tạo danh sách đã chọn ban đầu (đệ quy tìm cây)

@@ -41,6 +41,25 @@ export class AppComponent implements OnInit {
     }
     allDonvi: any[] = [];
     allNhansu: any[] = [];
+
+    selectedDanhmuc = [{
+      "organizationId": 124,
+      "orgObjId": null,
+      "orgCode": "EVN",
+      "orgName": "Tập đoàn Điện lực Việt Nam",
+      "orgParentId": "ABC",
+      "orgLevel": 1,
+      "shortName": "EVN"
+  },
+  {
+      "organizationId": 125,
+      "orgObjId": null,
+      "orgCode": "F01",
+      "orgName": "Tổng công ty Điện lực miền Bắc",
+      "orgParentId": "EVN",
+      "orgLevel": 2,
+      "shortName": "EVNNPC"
+  },]
     data = [
         {
             "organizationId": 124,
@@ -4932,6 +4951,7 @@ export class AppComponent implements OnInit {
         selectionMode: 'multiple',
         idField: 'organizationId',
         width: '1000px',
+        listSelected: this.selectedDanhmuc,
         columns: [
             {
                 header: 'Tên đơn vị',
@@ -6162,7 +6182,7 @@ export class AppComponent implements OnInit {
         dialogRef.afterClosed()
             .subscribe((result) => {
                 console.log(result);
-
+                this.dataDanhmuc.listSelected = result
             });
     }
 
